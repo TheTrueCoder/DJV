@@ -3,222 +3,222 @@ name: CI
 on: [push]
 
 jobs:
-  linux-build:
-    runs-on: ubuntu-latest
+  # linux-build:
+  #   runs-on: ubuntu-latest
 
-    env:
-      TLRENDER_NET: OFF
-      TLRENDER_OCIO: ON
-      TLRENDER_FFMPEG: ON
-      TLRENDER_FFMPEG_MINIMAL: ON
-      TLRENDER_USD: OFF
-      FEATHER_TK_API: GL_4_1
+  #   env:
+  #     TLRENDER_NET: OFF
+  #     TLRENDER_OCIO: ON
+  #     TLRENDER_FFMPEG: ON
+  #     TLRENDER_FFMPEG_MINIMAL: ON
+  #     TLRENDER_USD: OFF
+  #     FEATHER_TK_API: GL_4_1
 
-    steps:
-    - uses: actions/checkout@v4
-      with:
-        submodules: recursive
-    - uses: actions/setup-python@v5
-      with:
-        python-version: '3.11'
+  #   steps:
+  #   - uses: actions/checkout@v4
+  #     with:
+  #       submodules: recursive
+  #   - uses: actions/setup-python@v5
+  #     with:
+  #       python-version: '3.11'
 
-    - name: Setup environment
-      run: |
-        echo "$PWD/build/install/bin" >> $GITHUB_PATH
-        echo "LD_LIBRARY_PATH=$PWD/build/install/lib:$LD_LIBRARY_PATH" >> $GITHUB_ENV
-        echo "PYTHONPATH=$PWD/build/install/lib:$PYTHONPATH" >> $GITHUB_ENV
-        cmake --version
-        python --version
+  #   - name: Setup environment
+  #     run: |
+  #       echo "$PWD/build/install/bin" >> $GITHUB_PATH
+  #       echo "LD_LIBRARY_PATH=$PWD/build/install/lib:$LD_LIBRARY_PATH" >> $GITHUB_ENV
+  #       echo "PYTHONPATH=$PWD/build/install/lib:$PYTHONPATH" >> $GITHUB_ENV
+  #       cmake --version
+  #       python --version
 
-    - name: Build DJV
-      run: bash etc/Linux/linux-build-gha.sh Debug
+  #   - name: Build DJV
+  #     run: bash etc/Linux/linux-build-gha.sh Debug
 
-  linux-gles2-build:
-    runs-on: ubuntu-latest
+  # linux-gles2-build:
+  #   runs-on: ubuntu-latest
 
-    env:
-      TLRENDER_NET: OFF
-      TLRENDER_OCIO: OFF
-      TLRENDER_FFMPEG: OFF
-      TLRENDER_FFMPEG_MINIMAL: ON
-      TLRENDER_USD: OFF
-      FEATHER_TK_API: GLES_2
+  #   env:
+  #     TLRENDER_NET: OFF
+  #     TLRENDER_OCIO: OFF
+  #     TLRENDER_FFMPEG: OFF
+  #     TLRENDER_FFMPEG_MINIMAL: ON
+  #     TLRENDER_USD: OFF
+  #     FEATHER_TK_API: GLES_2
 
-    steps:
-    - uses: actions/checkout@v4
-      with:
-        submodules: recursive
-    - uses: actions/setup-python@v5
-      with:
-        python-version: '3.11'
+  #   steps:
+  #   - uses: actions/checkout@v4
+  #     with:
+  #       submodules: recursive
+  #   - uses: actions/setup-python@v5
+  #     with:
+  #       python-version: '3.11'
 
-    - name: Setup environment
-      run: |
-        echo "$PWD/build/install/bin" >> $GITHUB_PATH
-        echo "LD_LIBRARY_PATH=$PWD/build/install/lib:$LD_LIBRARY_PATH" >> $GITHUB_ENV
-        echo "PYTHONPATH=$PWD/build/install/lib:$PYTHONPATH" >> $GITHUB_ENV
-        cmake --version
-        python --version
+  #   - name: Setup environment
+  #     run: |
+  #       echo "$PWD/build/install/bin" >> $GITHUB_PATH
+  #       echo "LD_LIBRARY_PATH=$PWD/build/install/lib:$LD_LIBRARY_PATH" >> $GITHUB_ENV
+  #       echo "PYTHONPATH=$PWD/build/install/lib:$PYTHONPATH" >> $GITHUB_ENV
+  #       cmake --version
+  #       python --version
 
-    - name: Build DJV
-      run: bash etc/Linux/linux-build-gha.sh Debug
+  #   - name: Build DJV
+  #     run: bash etc/Linux/linux-build-gha.sh Debug
 
-  linux-package:
-    runs-on: ubuntu-22.04
+  # linux-package:
+  #   runs-on: ubuntu-22.04
 
-    env:
-      TLRENDER_NET: OFF
-      TLRENDER_OCIO: ON
-      TLRENDER_FFMPEG: ON
-      TLRENDER_FFMPEG_MINIMAL: ON
-      TLRENDER_USD: ON
-      FEATHER_TK_API: GL_4_1
+  #   env:
+  #     TLRENDER_NET: OFF
+  #     TLRENDER_OCIO: ON
+  #     TLRENDER_FFMPEG: ON
+  #     TLRENDER_FFMPEG_MINIMAL: ON
+  #     TLRENDER_USD: ON
+  #     FEATHER_TK_API: GL_4_1
 
-    steps:
-    - uses: actions/checkout@v4
-      with:
-        submodules: recursive
-    - uses: actions/setup-python@v5
-      with:
-        python-version: '3.11'
+  #   steps:
+  #   - uses: actions/checkout@v4
+  #     with:
+  #       submodules: recursive
+  #   - uses: actions/setup-python@v5
+  #     with:
+  #       python-version: '3.11'
 
-    - name: Setup environment
-      run: |
-        echo "$PWD/build/install/bin" >> $GITHUB_PATH
-        echo "LD_LIBRARY_PATH=$PWD/build/install/lib:$LD_LIBRARY_PATH" >> $GITHUB_ENV
-        echo "PYTHONPATH=$PWD/build/install/lib:$PYTHONPATH" >> $GITHUB_ENV
-        cmake --version
-        python --version
+  #   - name: Setup environment
+  #     run: |
+  #       echo "$PWD/build/install/bin" >> $GITHUB_PATH
+  #       echo "LD_LIBRARY_PATH=$PWD/build/install/lib:$LD_LIBRARY_PATH" >> $GITHUB_ENV
+  #       echo "PYTHONPATH=$PWD/build/install/lib:$PYTHONPATH" >> $GITHUB_ENV
+  #       cmake --version
+  #       python --version
 
-    - name: Build DJV
-      run: bash etc/Linux/linux-build-gha.sh Release
+  #   - name: Build DJV
+  #     run: bash etc/Linux/linux-build-gha.sh Release
 
-    - name: Package
-      run: |
-        cd build
-        cd DJV/src/DJV-build
-        cmake --build . -j 4 --target package
+  #   - name: Package
+  #     run: |
+  #       cd build
+  #       cd DJV/src/DJV-build
+  #       cmake --build . -j 4 --target package
 
-    - uses: actions/upload-artifact@v4
-      with:
-        name: DJV-Linux-Packages
-        path: build/DJV/src/DJV-build/DJV-*.tar.gz
+  #   - uses: actions/upload-artifact@v4
+  #     with:
+  #       name: DJV-Linux-Packages
+  #       path: build/DJV/src/DJV-build/DJV-*.tar.gz
 
-  macos-13-build:
-    runs-on: macos-13
+  # macos-13-build:
+  #   runs-on: macos-13
 
-    env:
-      TLRENDER_NET: OFF
-      TLRENDER_OCIO: ON
-      TLRENDER_FFMPEG: ON
-      TLRENDER_FFMPEG_MINIMAL: ON
-      TLRENDER_USD: OFF
-      FEATHER_TK_API: GL_4_1
-      CMAKE_OSX_DEPLOYMENT_TARGET: 10.15
-      CMAKE_OSX_ARCHITECTURES: x86_64
+  #   env:
+  #     TLRENDER_NET: OFF
+  #     TLRENDER_OCIO: ON
+  #     TLRENDER_FFMPEG: ON
+  #     TLRENDER_FFMPEG_MINIMAL: ON
+  #     TLRENDER_USD: OFF
+  #     FEATHER_TK_API: GL_4_1
+  #     CMAKE_OSX_DEPLOYMENT_TARGET: 10.15
+  #     CMAKE_OSX_ARCHITECTURES: x86_64
 
-    steps:
-    - uses: actions/checkout@v4
-      with:
-        submodules: recursive
-    - uses: actions/setup-python@v5
-      with:
-        python-version: '3.11'
+  #   steps:
+  #   - uses: actions/checkout@v4
+  #     with:
+  #       submodules: recursive
+  #   - uses: actions/setup-python@v5
+  #     with:
+  #       python-version: '3.11'
 
-    # \bug DYLD_LIBRARY_PATH is not being set here?
-    - name: Setup environment
-      run: |
-        echo "$PWD/build/install/bin" >> $GITHUB_PATH
-        echo "DYLD_LIBRARY_PATH=$PWD/build/install/lib:$DYLD_LIBRARY_PATH" >> $GITHUB_ENV
-        echo "PYTHONPATH=$PWD/build/install/lib:$PYTHONPATH" >> $GITHUB_ENV
-        cmake --version
-        python --version
+  #   # \bug DYLD_LIBRARY_PATH is not being set here?
+  #   - name: Setup environment
+  #     run: |
+  #       echo "$PWD/build/install/bin" >> $GITHUB_PATH
+  #       echo "DYLD_LIBRARY_PATH=$PWD/build/install/lib:$DYLD_LIBRARY_PATH" >> $GITHUB_ENV
+  #       echo "PYTHONPATH=$PWD/build/install/lib:$PYTHONPATH" >> $GITHUB_ENV
+  #       cmake --version
+  #       python --version
 
-    - name: Build DJV
-      run: |
-        export DYLD_LIBRARY_PATH=$PWD/build/install/lib:$DYLD_LIBRARY_PATH
-        bash etc/macOS/macos-build-gha.sh Debug
+  #   - name: Build DJV
+  #     run: |
+  #       export DYLD_LIBRARY_PATH=$PWD/build/install/lib:$DYLD_LIBRARY_PATH
+  #       bash etc/macOS/macos-build-gha.sh Debug
 
-  macos-build:
-    runs-on: macos-latest
+  # macos-build:
+  #   runs-on: macos-latest
 
-    env:
-      TLRENDER_NET: OFF
-      TLRENDER_OCIO: ON
-      TLRENDER_FFMPEG: ON
-      TLRENDER_FFMPEG_MINIMAL: ON
-      TLRENDER_USD: OFF
-      FEATHER_TK_API: GL_4_1
-      CMAKE_OSX_DEPLOYMENT_TARGET: 14
-      CMAKE_OSX_ARCHITECTURES: arm64
+  #   env:
+  #     TLRENDER_NET: OFF
+  #     TLRENDER_OCIO: ON
+  #     TLRENDER_FFMPEG: ON
+  #     TLRENDER_FFMPEG_MINIMAL: ON
+  #     TLRENDER_USD: OFF
+  #     FEATHER_TK_API: GL_4_1
+  #     CMAKE_OSX_DEPLOYMENT_TARGET: 14
+  #     CMAKE_OSX_ARCHITECTURES: arm64
 
-    steps:
-    - uses: actions/checkout@v4
-      with:
-        submodules: recursive
-    - uses: actions/setup-python@v5
-      with:
-        python-version: '3.11'
+  #   steps:
+  #   - uses: actions/checkout@v4
+  #     with:
+  #       submodules: recursive
+  #   - uses: actions/setup-python@v5
+  #     with:
+  #       python-version: '3.11'
 
-    # \bug DYLD_LIBRARY_PATH is not being set here?
-    - name: Setup environment
-      run: |
-        echo "$PWD/build/install/bin" >> $GITHUB_PATH
-        echo "DYLD_LIBRARY_PATH=$PWD/build/install/lib:$DYLD_LIBRARY_PATH" >> $GITHUB_ENV
-        echo "PYTHONPATH=$PWD/build/install/lib:$PYTHONPATH" >> $GITHUB_ENV
-        cmake --version
-        python --version
+  #   # \bug DYLD_LIBRARY_PATH is not being set here?
+  #   - name: Setup environment
+  #     run: |
+  #       echo "$PWD/build/install/bin" >> $GITHUB_PATH
+  #       echo "DYLD_LIBRARY_PATH=$PWD/build/install/lib:$DYLD_LIBRARY_PATH" >> $GITHUB_ENV
+  #       echo "PYTHONPATH=$PWD/build/install/lib:$PYTHONPATH" >> $GITHUB_ENV
+  #       cmake --version
+  #       python --version
 
-    - name: Build DJV
-      run: |
-        export DYLD_LIBRARY_PATH=$PWD/build/install/lib:$DYLD_LIBRARY_PATH
-        bash etc/macOS/macos-build-gha.sh Debug
+  #   - name: Build DJV
+  #     run: |
+  #       export DYLD_LIBRARY_PATH=$PWD/build/install/lib:$DYLD_LIBRARY_PATH
+  #       bash etc/macOS/macos-build-gha.sh Debug
 
-  macos-package:
-    runs-on: macos-latest
+  # macos-package:
+  #   runs-on: macos-latest
 
-    env:
-      TLRENDER_NET: OFF
-      TLRENDER_OCIO: ON
-      TLRENDER_FFMPEG: ON
-      TLRENDER_FFMPEG_MINIMAL: ON
-      TLRENDER_USD: ON
-      FEATHER_TK_API: GL_4_1
-      CMAKE_OSX_DEPLOYMENT_TARGET: 10.15
-      CMAKE_OSX_ARCHITECTURES: arm64
+  #   env:
+  #     TLRENDER_NET: OFF
+  #     TLRENDER_OCIO: ON
+  #     TLRENDER_FFMPEG: ON
+  #     TLRENDER_FFMPEG_MINIMAL: ON
+  #     TLRENDER_USD: ON
+  #     FEATHER_TK_API: GL_4_1
+  #     CMAKE_OSX_DEPLOYMENT_TARGET: 10.15
+  #     CMAKE_OSX_ARCHITECTURES: arm64
 
-    steps:
-    - uses: actions/checkout@v4
-      with:
-        submodules: recursive
-    - uses: actions/setup-python@v5
-      with:
-        python-version: '3.11'
+  #   steps:
+  #   - uses: actions/checkout@v4
+  #     with:
+  #       submodules: recursive
+  #   - uses: actions/setup-python@v5
+  #     with:
+  #       python-version: '3.11'
 
-    # \bug DYLD_LIBRARY_PATH is not being set here?
-    - name: Setup environment
-      run: |
-        echo "$PWD/build/install/bin" >> $GITHUB_PATH
-        echo "DYLD_LIBRARY_PATH=$PWD/build/install/lib:$DYLD_LIBRARY_PATH" >> $GITHUB_ENV
-        echo "PYTHONPATH=$PWD/build/install/lib:$PYTHONPATH" >> $GITHUB_ENV
-        cmake --version
-        python --version
+  #   # \bug DYLD_LIBRARY_PATH is not being set here?
+  #   - name: Setup environment
+  #     run: |
+  #       echo "$PWD/build/install/bin" >> $GITHUB_PATH
+  #       echo "DYLD_LIBRARY_PATH=$PWD/build/install/lib:$DYLD_LIBRARY_PATH" >> $GITHUB_ENV
+  #       echo "PYTHONPATH=$PWD/build/install/lib:$PYTHONPATH" >> $GITHUB_ENV
+  #       cmake --version
+  #       python --version
 
-    - name: Build DJV
-      run: |
-        export DYLD_LIBRARY_PATH=$PWD/build/install/lib:$DYLD_LIBRARY_PATH
-        bash etc/macOS/macos-build-gha.sh Release
+  #   - name: Build DJV
+  #     run: |
+  #       export DYLD_LIBRARY_PATH=$PWD/build/install/lib:$DYLD_LIBRARY_PATH
+  #       bash etc/macOS/macos-build-gha.sh Release
 
-    - name: Package
-      run: |
-        cd build
-        cd DJV/src/DJV-build
-        cmake --build . -j 4 --target package
+  #   - name: Package
+  #     run: |
+  #       cd build
+  #       cd DJV/src/DJV-build
+  #       cmake --build . -j 4 --target package
 
-    - uses: actions/upload-artifact@v4
-      with:
-        name: DJV-macOS-Packages
-        path: build/DJV/src/DJV-build/DJV-*.dmg
+  #   - uses: actions/upload-artifact@v4
+  #     with:
+  #       name: DJV-macOS-Packages
+  #       path: build/DJV/src/DJV-build/DJV-*.dmg
 
   windows-build:
     runs-on: windows-latest
@@ -227,7 +227,7 @@ jobs:
       TLRENDER_NET: OFF
       TLRENDER_OCIO: ON
       TLRENDER_FFMPEG: ON
-      TLRENDER_FFMPEG_MINIMAL: ON
+      TLRENDER_FFMPEG_MINIMAL: OFF
       TLRENDER_USD: OFF
       FEATHER_TK_API: GL_4_1
 
@@ -262,7 +262,7 @@ jobs:
       TLRENDER_NET: OFF
       TLRENDER_OCIO: ON
       TLRENDER_FFMPEG: ON
-      TLRENDER_FFMPEG_MINIMAL: ON
+      TLRENDER_FFMPEG_MINIMAL: OFF
       TLRENDER_USD: ON
       FEATHER_TK_API: GL_4_1
 
